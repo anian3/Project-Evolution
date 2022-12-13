@@ -1,6 +1,6 @@
 package evolution;
 
-public enum MoveDirection {
+public enum Gene {
 
     FORWARD,
     FORWARD_RIGHT,

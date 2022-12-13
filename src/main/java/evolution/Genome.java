@@ -1,0 +1,38 @@
+package evolution;
+
+import java.util.Random;
+
+public class Genome {
+    private final Gene[] genes;
+    private final int geneCount;
+    private int iterator;
+    public Genome(int geneCount){
+        this.geneCount=geneCount;
+        genes=new Gene [geneCount];
+        Random rand = new Random();
+        iterator=rand.nextInt(geneCount);
+        randomGenes();
+    }
+    public void randomGenes(){
+        for (int i=0; i<geneCount;i++){
+            Random rand = new Random();
+            int n = rand.nextInt(8);
+            genes[i] = switch (n){
+                case 1 -> Gene.FORWARD_RIGHT;
+                case 2 -> Gene.RIGHT;
+                case 3 -> Gene.BACKWARD_RIGHT;
+                case 4 -> Gene.BACKWARD;
+                case 5 -> Gene.BACKWARD_LEFT;
+                case 6 -> Gene.LEFT;
+                case 7 -> Gene.FORWARD_LEFT;
+                default -> Gene.FORWARD;
+            };
+        }
+    }
+    public Gene getGene(){
+        Gene gene = genes[iterator];
+        iterator =(iterator+1)%geneCount;
+        return gene;
+    }
+}
+

@@ -1,20 +1,19 @@
 package evolution;
 
-import java.io.File;
-import java.util.ArrayList;
-
 public class Animal implements IMapElement{
     private MapDirection direction;
     private Vector2d position;
+    private final Genome genome;
 
     @Override
     public Vector2d getPosition() {
         return position;
     }
 
-    public Animal(Vector2d initialPosition) {
+    public Animal(Vector2d initialPosition,Genome genome) {
         direction = MapDirection.NORTH;
         position = initialPosition;
+        this.genome=genome;
     }
 
     public String toString(){
@@ -25,8 +24,8 @@ public class Animal implements IMapElement{
         return position.equals(this.position);
     }
 
-    public void move(MoveDirection direction){
-        switch (direction) {
+    public void move(Gene gene){
+        switch (gene) {
             case FORWARD_RIGHT -> switchDirection(1);
             case RIGHT -> switchDirection(2);
             case BACKWARD_RIGHT -> switchDirection(3);
