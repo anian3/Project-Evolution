@@ -3,17 +3,21 @@ package evolution;
 public class Animal implements IMapElement{
     private MapDirection direction;
     private Vector2d position;
+    private IWorldMap map;
     private final Genome genome;
+    private int daysLived;
+    private final Energy energy;
 
     @Override
     public Vector2d getPosition() {
         return position;
     }
 
-    public Animal(Vector2d initialPosition,Genome genome) {
+    public Animal(Vector2d initialPosition,Genome genome, int energy, int fedEnergy) {
         direction = MapDirection.NORTH;
         position = initialPosition;
         this.genome=genome;
+        this.energy = new Energy(energy, fedEnergy);
     }
 
     public String toString(){
