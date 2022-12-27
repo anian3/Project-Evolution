@@ -3,8 +3,8 @@ package evolution;
 import java.util.Objects;
 
 public class Vector2d {
-    public final int x;
-    public final int y;
+    private final int x;
+    private final int y;
 
     public Vector2d(int x, int y) {
         this.x = x;
@@ -14,6 +14,7 @@ public class Vector2d {
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
+
 
     public boolean precedes(Vector2d other) {
         return this.x <= other.x && this.y <= other.y;

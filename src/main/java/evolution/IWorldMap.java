@@ -10,7 +10,7 @@ public interface IWorldMap {
 
     boolean place(Animal animal);
 
-    boolean remove(Animal animal);
+    boolean remove(IMapElement object);
 
     boolean isOccupied(Vector2d position);
 
