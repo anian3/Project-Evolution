@@ -1,29 +1,28 @@
 package evolution;
 
-import java.util.LinkedList;
 
 public class Energy {
 
-    private int energy;
+    protected int energyValue;
     private final int fedEnergy;
 
 //    private LinkedList<IDeathObserver> observers;
 
     public Energy(int energy, int fedEnergy) {
-        this.energy = energy;
+        this.energyValue = energy;
         this.fedEnergy = fedEnergy;
     }
 
     public void addEnergy(int grassNutrition){
-        this.energy += grassNutrition;
+        this.energyValue += grassNutrition;
     }
 
     public void substractEnergy(int energyConsumed){
-        this.energy -= energyConsumed;
+        this.energyValue -= energyConsumed;
     }
 
     public boolean isFed(){
-        return energy >= fedEnergy;
+        return energyValue >= fedEnergy;
     }
 
 //    public void addObserver(IPositionChangeObserver observer){

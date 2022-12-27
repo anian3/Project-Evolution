@@ -9,6 +9,8 @@ public abstract class AbstractWorldMap implements IWorldMap{
     protected Vector2d mapEnd;
     protected LinkedList<Animal> animals = new LinkedList<>();
     protected Map<Vector2d, IMapElement> grasses = new HashMap<>();
+    protected int grassNutrition;
+    protected int energyUsed;
 
     public boolean isBeyond(Vector2d position) {
         return !position.follows(new Vector2d(0, 0)) || !position.precedes(mapEnd);
@@ -56,16 +58,33 @@ public abstract class AbstractWorldMap implements IWorldMap{
 
     public void eat(Vector2d position) {
         if (isGrassAt(position) && isAnimalAt(position)){
-
+            strongestAnimalAt(position).energy.addEnergy(grassNutrition);
+            remove(grasses.get(position));
         }
     }
 
     public Animal strongestAnimalAt(Vector2d position) {
-
-        return null;
+        int maxEnergy = 0;
+        Animal currentAnimal = null;
+        for (Animal animal:animals){
+            if (animal.getEnergyValue() > maxEnergy){
+                maxEnergy = animal.getEnergyValue();
+                currentAnimal = animal;
+            }
+        }
+        return currentAnimal;
     }
 
     public Animal secondStrongestAt(Vector2d position) {
-        return null;
+        Animal strongestAnimal = strongestAnimalAt(position);
+        int maxEnergy = 0;
+        Animal secondStrongest = null;
+        for (Animal animal:animals){
+            if (!animal.equals(strongestAnimal) && animal.getEnergyValue() > maxEnergy){
+                maxEnergy = animal.getEnergyValue();
+                secondStrongest = animal;
+            }
+        }
+        return secondStrongest;
     }
 }

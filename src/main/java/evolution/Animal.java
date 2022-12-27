@@ -6,7 +6,7 @@ public class Animal implements IMapElement{
     private IWorldMap map;
     private final Genome genome;
     private int daysLived;
-    private final Energy energy;
+    protected final Energy energy;
 
     @Override
     public Vector2d getPosition() {
@@ -41,9 +41,17 @@ public class Animal implements IMapElement{
         this.position = this.position.add(this.direction.toUnitVector());
     }
 
+    public void moveTo(Vector2d position){
+        this.position = position;
+    }
+
     public void switchDirection(int number){
         for (int i=0; i< number; i++) {
             this.direction = this.direction.next();
         }
+    }
+
+    public int getEnergyValue(){
+        return energy.energyValue;
     }
 }

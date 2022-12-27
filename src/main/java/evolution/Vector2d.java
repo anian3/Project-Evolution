@@ -1,6 +1,7 @@
 package evolution;
 
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Vector2d {
     private final int x;
@@ -46,6 +47,7 @@ public class Vector2d {
             return false;
         return that.x == this.x && that.y == this.y;
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(this.x, this.y);
@@ -55,13 +57,25 @@ public class Vector2d {
         return new Vector2d(this.x * (-1), this.y * (-1));
     }
 
-    public int compareX(Vector2d other){
-        if (this.x - other.x != 0) return this.x - other.x;
-        return this.y - other.y;
+    public Vector2d vectorInMap(Vector2d mapEnd) {
+        int x = this.x;
+        int y = this.y;
+        if (x > mapEnd.x) {
+            x = 0;
+        } else if (x < 0) {
+            x = mapEnd.x;
+        }
+        if (y > mapEnd.y) {
+            y = 0;
+        } else if (y < 0) {
+            y = mapEnd.y;
+        }
+        return new Vector2d(x, y);
     }
 
-    public int compareY(Vector2d other){
-        if (this.y - other.y != 0) return this.y - other.y;
-        return this.x - other.x;
+    public Vector2d randomInMap() {
+        int x = ThreadLocalRandom.current().nextInt(0, this.x + 1);
+        int y = ThreadLocalRandom.current().nextInt(0, this.y + 1);
+        return new Vector2d(x, y);
     }
 }
