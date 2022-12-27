@@ -3,9 +3,9 @@ package evolution;
 import java.util.Random;
 
 public class Genome {
-    private final Gene[] genes;
-    private final int geneCount;
-    private int iterator;
+    protected final Gene[] genes;
+    protected final int geneCount;
+    protected int iterator;
     public Genome(int geneCount){
         this.geneCount=geneCount;
         genes=new Gene [geneCount];
@@ -30,9 +30,7 @@ public class Genome {
         }
     }
     public Gene getGene(){
-        Gene gene = genes[iterator];
-        iterator =(iterator+1)%geneCount;
-        return gene;
+        return genes[iterator];
     }
 }
 

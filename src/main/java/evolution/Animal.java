@@ -1,7 +1,7 @@
 package evolution;
 
 public class Animal implements IMapElement{
-    private MapDirection direction;
+    MapDirection direction;
     private Vector2d position;
     private IWorldMap map;
     private final Genome genome;

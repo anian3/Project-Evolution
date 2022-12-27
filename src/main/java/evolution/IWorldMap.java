@@ -23,4 +23,6 @@ public interface IWorldMap {
     Animal strongestAnimalAt(Vector2d position);
 
     Animal secondStrongestAt(Vector2d position);
+
+    Vector2d getMapEnd();
 }

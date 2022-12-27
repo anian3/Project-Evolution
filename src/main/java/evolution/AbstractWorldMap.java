@@ -87,4 +87,7 @@ public abstract class AbstractWorldMap implements IWorldMap{
         }
         return secondStrongest;
     }
+    public Vector2d getMapEnd(){
+        return this.mapEnd;
+    }
 }
