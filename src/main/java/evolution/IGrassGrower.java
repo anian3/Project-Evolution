@@ -2,6 +2,7 @@ package evolution;
 
 public interface IGrassGrower {
 
-    boolean growGrass(Vector2d[] forests);
+    boolean growGrass();
     void findForest();
+    void createGrasses();
 }

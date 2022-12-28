@@ -1,14 +1,42 @@
 package evolution;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public abstract class GrassGrower implements IGrassGrower{
     protected IWorldMap map;
-
-    public GrassGrower(IWorldMap map){
-        this.map=map;
-    }
+    List<Vector2d> forest = new ArrayList<>();
+    List<Vector2d> barren = new ArrayList<>();
+    int grassCount;
     @Override
-    public boolean growGrass(Vector2d[] forests) {
-        return false;
+    public boolean growGrass() {
+        Random rand = new Random();
+        double random = rand.nextDouble();
+        Vector2d position;
+        rand = new Random();
+        if (random < 0.8){
+            int index = rand.nextInt(forest.size());
+            position = forest.get(index);
+        }
+        else {
+            int index = rand.nextInt(barren.size());
+            position = barren.get(index);
+        }
+        if(map.isGrassAt(position)){
+            return false;
+        }
+        map.growGrass(position);
+        return true;
+    }
 
+    public void createGrasses(){
+        int i = 0;
+        findForest();
+        while (i < grassCount){
+            if (growGrass()){
+                i++;
+            }
+        }
     }
 }

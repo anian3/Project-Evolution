@@ -1,6 +1,6 @@
 package evolution;
 
-public interface IWorldMap {
+public interface IWorldMap{
 
 //  czy to poza krawędzią?
     boolean isBeyond(Vector2d position);
@@ -25,4 +25,6 @@ public interface IWorldMap {
     Animal secondStrongestAt(Vector2d position);
 
     Vector2d getMapEnd();
+
+    void growGrass(Vector2d position);
 }

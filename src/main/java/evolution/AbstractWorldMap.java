@@ -8,9 +8,11 @@ public abstract class AbstractWorldMap implements IWorldMap{
 
     protected Vector2d mapEnd;
     protected LinkedList<Animal> animals = new LinkedList<>();
-    protected Map<Vector2d, IMapElement> grasses = new HashMap<>();
+    public Map<Vector2d, IMapElement> grasses;
     protected int grassNutrition;
     protected int energyUsed;
+    public DeadAnimals deadAnimals = new DeadAnimals();
+    public IDeathObserver grassGrower;
 
     public boolean isBeyond(Vector2d position) {
         return !position.follows(new Vector2d(0, 0)) || !position.precedes(mapEnd);
@@ -90,4 +92,16 @@ public abstract class AbstractWorldMap implements IWorldMap{
     public Vector2d getMapEnd(){
         return this.mapEnd;
     }
+
+    public void growGrass(Vector2d position){
+        grasses.put(position, new Grass(position));
+    }
+
+//    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+//        if (oldPosition != null) {
+//            remove(oldPosition);
+//            animals.put(newPosition, animal);
+//        }
+//    }
+//    }
 }

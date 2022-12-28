@@ -1,11 +1,17 @@
 package evolution;
 
+import java.util.HashMap;
+
 public class GlobeMap extends AbstractWorldMap{
 
-    public GlobeMap(int height, int width, int grassNutrition, int energyUsed){
+//    public DeadAnimals deadAnimals = new DeadAnimals();
+
+    public GlobeMap(int height, int width, int grassNutrition, int energyUsed, IDeathObserver grassGrower){
         mapEnd = new Vector2d(width, height);
         this.grassNutrition = grassNutrition;
         this.energyUsed = energyUsed;
+        this.grassGrower = grassGrower;
+        grasses = new HashMap<>();
     }
 
 //    raczej z góry zakłada, że position, które przyjmuje jest poza mapą
