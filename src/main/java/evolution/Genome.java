@@ -2,16 +2,17 @@ package evolution;
 
 import java.util.Random;
 
-public class Genome {
-    protected final Gene[] genes;
+import static java.util.Arrays.copyOfRange;
+
+public abstract class Genome implements IGenome{
     protected final int geneCount;
     protected int iterator;
+    protected Gene[] genes;
     public Genome(int geneCount){
         this.geneCount=geneCount;
-        genes=new Gene [geneCount];
         Random rand = new Random();
-        iterator=rand.nextInt(geneCount);
-        randomGenes();
+        iterator = rand.nextInt(geneCount);
+        genes = new Gene[geneCount];
     }
     public void randomGenes(){
         for (int i=0; i<geneCount;i++){
@@ -30,7 +31,19 @@ public class Genome {
         }
     }
     public Gene getGene(){
-        return genes[iterator];
+        Gene gene =  genes[iterator];
+        findNextGene();
+        return gene;
+    }
+    public Gene[] getFromLeft(int numberOfGenes){
+        return copyOfRange(genes, 0, numberOfGenes-1);
+    }
+
+    public Gene[] getFromRight(int numberOfGenes){
+        return copyOfRange(genes, geneCount-numberOfGenes, geneCount-1);
+    }
+    public void writeGenes(Gene[] genes){
+        this.genes = genes;
     }
 }
 

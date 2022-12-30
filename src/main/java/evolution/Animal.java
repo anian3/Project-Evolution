@@ -25,6 +25,7 @@ public class Animal implements IMapElement{
         this.map = map;
         addDeathObserver(map.deadAnimals);
         addDeathObserver(map.grassGrower);
+        map.place(this);
     }
 
     public String toString(){
@@ -75,5 +76,8 @@ public class Animal implements IMapElement{
 
     public void removeDeathObserver(IDeathObserver observer){
         deathObservers.remove(observer);
+    }
+    public Genome getGenome(){
+        return genome;
     }
 }

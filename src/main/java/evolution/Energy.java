@@ -25,6 +25,10 @@ public class Energy {
         return energyValue >= fedEnergy;
     }
 
+    public boolean isDead(){
+        return energyValue==0;
+    }
+
 //    public void addObserver(IPositionChangeObserver observer){
 //        observers.add(observer);
 //    }

@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class CrazyAnimal extends Genome{
 
+
     public CrazyAnimal(int geneCount) {
         super(geneCount);
     }

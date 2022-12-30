@@ -7,7 +7,7 @@ public class World {
 
     public static void main(String[] args) {
         System.out.println("Hej! :P");
-
-        System.out.println(3/2);
+        int pop = 1/2;
+        System.out.println(pop);
     }
 }
