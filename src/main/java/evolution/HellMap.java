@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class HellMap extends AbstractWorldMap{
 
 //    public DeadAnimals deadAnimals = new DeadAnimals();
-    public HellMap(int height, int width, int grassNutrition, int energyUsed, boolean isEquator,int grassCount){
+    public HellMap(int width, int height, int grassNutrition, int energyUsed, boolean isEquator,int grassCount){
         mapEnd = new Vector2d(width, height);
         this.grassNutrition = grassNutrition;
         this.energyUsed = energyUsed;

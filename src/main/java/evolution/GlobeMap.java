@@ -6,7 +6,7 @@ public class GlobeMap extends AbstractWorldMap{
 
 //    public DeadAnimals deadAnimals = new DeadAnimals();
 
-    public GlobeMap(int height, int width, int grassNutrition, int energyUsed, boolean isEquator,int grassCount){
+    public GlobeMap(int width, int height, int grassNutrition, int energyUsed, boolean isEquator,int grassCount){
         mapEnd = new Vector2d(width, height);
         this.grassNutrition = grassNutrition;
         this.energyUsed = energyUsed;
