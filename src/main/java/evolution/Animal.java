@@ -9,8 +9,8 @@ public class Animal implements IMapElement{
     private final Genome genome;
     private int daysLived;
     protected final Energy energy;
-    private LinkedList<IDeathObserver> deathObservers;
-    private LinkedList<IPositionChangeObserver> positionObservers;
+    private LinkedList<IDeathObserver> deathObservers = new LinkedList<>();
+    private LinkedList<IPositionChangeObserver> positionObservers = new LinkedList<>();
 
     @Override
     public Vector2d getPosition() {
@@ -24,7 +24,9 @@ public class Animal implements IMapElement{
         this.energy = new Energy(energy, fedEnergy);
         this.map = map;
         addDeathObserver(map.deadAnimals);
-        addDeathObserver(map.grassGrower);
+        if (map.grassGrower.getClass().equals(ToxicCorpses.class)) {
+            addDeathObserver((IDeathObserver) map.grassGrower);
+        }
         map.place(this);
     }
 

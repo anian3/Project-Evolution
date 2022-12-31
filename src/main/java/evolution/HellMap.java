@@ -5,11 +5,16 @@ import java.util.HashMap;
 public class HellMap extends AbstractWorldMap{
 
 //    public DeadAnimals deadAnimals = new DeadAnimals();
-    public HellMap(int height, int width, int grassNutrition, int energyUsed, IDeathObserver grassGrower){
+    public HellMap(int height, int width, int grassNutrition, int energyUsed, boolean isEquator,int grassCount){
         mapEnd = new Vector2d(width, height);
         this.grassNutrition = grassNutrition;
         this.energyUsed = energyUsed;
-        this.grassGrower = grassGrower;
+        if (isEquator){
+            this.grassGrower=new GrassyEquator(this,grassCount);
+        }
+        else {
+            this.grassGrower = new ToxicCorpses(this,grassCount);
+        }
         grasses = new HashMap<>();
     }
 

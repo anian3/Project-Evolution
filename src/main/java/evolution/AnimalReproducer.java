@@ -51,13 +51,15 @@ public abstract class AnimalReproducer implements IAnimalReproduce{
     public Gene[] makeGenes (Animal animal1, Animal animal2){
         Random rand = new Random();
         boolean leftSide = rand.nextBoolean();
-        int numberOfGenes = geneCount * (animal1.getEnergyValue() / (animal1.getEnergyValue() + animal2.getEnergyValue()));
+        int numberOfGenes =  ((geneCount * animal1.getEnergyValue()) / (animal1.getEnergyValue() + animal2.getEnergyValue()));
         Gene[] combinedGenes;
         if (leftSide){
+            System.out.println(animal1.getGenome().toString());
              combinedGenes = Stream.concat(Arrays.stream(animal1.getGenome().getFromLeft(numberOfGenes)), Arrays.stream(animal2.getGenome().getFromRight(geneCount-numberOfGenes)))
                     .toArray(Gene[]::new);
         }
         else{
+            System.out.println(animal1.getGenome().getFromLeft(numberOfGenes)[0].toString());
             combinedGenes = Stream.concat(Arrays.stream(animal2.getGenome().getFromLeft(geneCount-numberOfGenes)),Arrays.stream(animal1.getGenome().getFromRight(numberOfGenes)))
                     .toArray(Gene[]::new);
         }
