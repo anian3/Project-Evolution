@@ -11,8 +11,13 @@ public abstract class AbstractWorldMap implements IWorldMap{
     public Map<Vector2d, IMapElement> grasses;
     protected int grassNutrition;
     protected int energyUsed;
-    public DeadAnimals deadAnimals = new DeadAnimals();
+    protected DeadAnimals deadAnimals;
     public GrassGrower grassGrower;
+    public int grassCount;
+
+    protected int geneCount;
+    protected int fedEnergy;
+    protected boolean isCrazy;
 
     public boolean isBeyond(Vector2d position) {
         return !position.follows(new Vector2d(0, 0)) || !position.precedes(mapEnd);

@@ -10,22 +10,12 @@ import static java.util.Collections.shuffle;
 
 public abstract class AnimalReproducer implements IAnimalReproduce{
     AbstractWorldMap map;
-    int geneCount;
-    boolean isCrazy;
-    int reproducingEnergy;
     int fedEnergy;
-    public AnimalReproducer(AbstractWorldMap map,int geneCount,boolean isCrazy,int reproducingEnergy, int fedEnergy){
-        this.map=map;
-        this.geneCount=geneCount;
-        this.isCrazy=isCrazy;
-        this.reproducingEnergy=reproducingEnergy;
-        this.fedEnergy=fedEnergy;
-    }
     public int[] whichGenesMutate(){
         Random rand = new Random();
-        int mutationCount = rand.nextInt(geneCount+1);
+        int mutationCount = rand.nextInt(map.geneCount+1);
         List <Integer> indexes = new LinkedList<>();
-        for (int i=0; i<geneCount;i++){
+        for (int i=0; i<map.geneCount;i++){
             indexes.add(i);
         }
         shuffle(indexes);
@@ -38,11 +28,11 @@ public abstract class AnimalReproducer implements IAnimalReproduce{
 
     public Genome makeGenome(Animal animal1, Animal animal2) {
         Genome newGenome;
-        if (isCrazy) {
-            newGenome = new CrazyAnimal(geneCount);
+        if (map.isCrazy) {
+            newGenome = new CrazyAnimal(map.geneCount);
         }
         else {
-            newGenome = new PredestinedAnimal(geneCount);
+            newGenome = new PredestinedAnimal(map.geneCount);
         }
         newGenome.writeGenes(mutate(makeGenes(animal1, animal2)));
         return newGenome;
@@ -51,16 +41,16 @@ public abstract class AnimalReproducer implements IAnimalReproduce{
     public Gene[] makeGenes (Animal animal1, Animal animal2){
         Random rand = new Random();
         boolean leftSide = rand.nextBoolean();
-        int numberOfGenes =  ((geneCount * animal1.getEnergyValue()) / (animal1.getEnergyValue() + animal2.getEnergyValue()));
+        int numberOfGenes =  ((map.geneCount * animal1.getEnergyValue()) / (animal1.getEnergyValue() + animal2.getEnergyValue()));
         Gene[] combinedGenes;
         if (leftSide){
             System.out.println(animal1.getGenome().toString());
-             combinedGenes = Stream.concat(Arrays.stream(animal1.getGenome().getFromLeft(numberOfGenes)), Arrays.stream(animal2.getGenome().getFromRight(geneCount-numberOfGenes)))
+             combinedGenes = Stream.concat(Arrays.stream(animal1.getGenome().getFromLeft(numberOfGenes)), Arrays.stream(animal2.getGenome().getFromRight(map.geneCount-numberOfGenes)))
                     .toArray(Gene[]::new);
         }
         else{
             System.out.println(animal1.getGenome().getFromLeft(numberOfGenes)[0].toString());
-            combinedGenes = Stream.concat(Arrays.stream(animal2.getGenome().getFromLeft(geneCount-numberOfGenes)),Arrays.stream(animal1.getGenome().getFromRight(numberOfGenes)))
+            combinedGenes = Stream.concat(Arrays.stream(animal2.getGenome().getFromLeft(map.geneCount-numberOfGenes)),Arrays.stream(animal1.getGenome().getFromRight(numberOfGenes)))
                     .toArray(Gene[]::new);
         }
         return combinedGenes;
@@ -74,8 +64,10 @@ public abstract class AnimalReproducer implements IAnimalReproduce{
         return genes;
     }
     public void reproduce(Animal animal1, Animal animal2){
-        animal1.energy.substractEnergy(reproducingEnergy);
-        animal2.energy.substractEnergy(reproducingEnergy);
-        Animal childAnimal = new Animal(animal1.getPosition(),makeGenome(animal1, animal2),2*reproducingEnergy,fedEnergy,map);
+        if (animal1.energy.isFed() && animal2.energy.isFed()) {
+            animal1.energy.substractEnergy(map.energyUsed);
+            animal2.energy.substractEnergy(map.energyUsed);
+            Animal childAnimal = new Animal(animal1.getPosition(), makeGenome(animal1, animal2), 2 * map.energyUsed, map);
+        }
     }
 }

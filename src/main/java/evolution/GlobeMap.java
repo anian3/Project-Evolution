@@ -6,17 +6,22 @@ public class GlobeMap extends AbstractWorldMap{
 
 //    public DeadAnimals deadAnimals = new DeadAnimals();
 
-    public GlobeMap(int width, int height, int grassNutrition, int energyUsed, boolean isEquator,int grassCount){
+    public GlobeMap(int width, int height, int grassNutrition, int energyUsed, boolean isEquator,int grassCount, int geneCount, int fedEnergy, boolean isCrazy){
         mapEnd = new Vector2d(width, height);
         this.grassNutrition = grassNutrition;
         this.energyUsed = energyUsed;
+        this.grassCount = grassCount;
+        this.geneCount = geneCount;
+        this.fedEnergy = fedEnergy;
+        this.isCrazy = isCrazy;
+        grasses = new HashMap<>();
         if (isEquator){
-            this.grassGrower=new GrassyEquator(this,grassCount);
+            this.grassGrower=new GrassyEquator(this, grassCount);
         }
         else {
-            this.grassGrower = new ToxicCorpses(this,grassCount);
+            this.grassGrower = new ToxicCorpses(this, grassCount);
         }
-        grasses = new HashMap<>();
+        this.deadAnimals = new DeadAnimals(this);
     }
 
 //    raczej z góry zakłada, że position, które przyjmuje jest poza mapą

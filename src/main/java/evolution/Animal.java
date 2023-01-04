@@ -17,12 +17,12 @@ public class Animal implements IMapElement{
         return position;
     }
 
-    public Animal(Vector2d initialPosition,Genome genome, int energy, int fedEnergy, AbstractWorldMap map) {
+    public Animal(Vector2d initialPosition,Genome genome, int startEnergy, AbstractWorldMap map) {
         direction = MapDirection.NORTH;
         position = initialPosition;
         this.genome=genome;
-        this.energy = new Energy(energy, fedEnergy);
         this.map = map;
+        this.energy = new Energy(startEnergy, map.fedEnergy, this);
         addDeathObserver(map.deadAnimals);
         if (map.grassGrower.getClass().equals(ToxicCorpses.class)) {
             addDeathObserver((IDeathObserver) map.grassGrower);
@@ -38,7 +38,8 @@ public class Animal implements IMapElement{
         return position.equals(this.position);
     }
 
-    public void move(Gene gene){
+    public void move(){
+        Gene gene = genome.getGene();
         switch (gene) {
             case FORWARD_RIGHT -> switchDirection(1);
             case RIGHT -> switchDirection(2);
@@ -49,6 +50,7 @@ public class Animal implements IMapElement{
             case FORWARD_LEFT -> switchDirection(7);
         }
         this.position = this.position.add(this.direction.toUnitVector());
+        this.energy.substractEnergy(1);
     }
 
     public void moveTo(Vector2d position){
@@ -78,6 +80,12 @@ public class Animal implements IMapElement{
 
     public void removeDeathObserver(IDeathObserver observer){
         deathObservers.remove(observer);
+    }
+
+    public void animalDied(){
+        for (IDeathObserver observer: deathObservers){
+            observer.animalDied(this);
+        }
     }
     public Genome getGenome(){
         return genome;

@@ -1,16 +1,19 @@
 package evolution;
 
 
+import java.util.LinkedList;
+
 public class Energy {
 
     protected int energyValue;
     private final int fedEnergy;
 
-//    private LinkedList<IDeathObserver> observers;
+    private Animal animal;
 
-    public Energy(int energy, int fedEnergy) {
+    public Energy(int energy, int fedEnergy, Animal animal) {
         this.energyValue = energy;
         this.fedEnergy = fedEnergy;
+        this.animal = animal;
     }
 
     public void addEnergy(int grassNutrition){
@@ -18,7 +21,11 @@ public class Energy {
     }
 
     public void substractEnergy(int energyConsumed){
+
         this.energyValue -= energyConsumed;
+        if (isDead()){
+            animal.animalDied();
+        }
     }
 
     public boolean isFed(){
@@ -29,8 +36,4 @@ public class Energy {
         return energyValue==0;
     }
 
-//    public void addObserver(IPositionChangeObserver observer){
-//        observers.add(observer);
-//    }
-//    public void animalDied();
 }

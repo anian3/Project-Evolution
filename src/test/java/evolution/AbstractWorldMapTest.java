@@ -10,7 +10,7 @@ class AbstractWorldMapTest {
     @Test
     void testIsBeyond() {
         //given:
-        IWorldMap map = new GlobeMap(7, 9, 5, 2, false, 15);
+        IWorldMap map = new GlobeMap(7, 9, 5, 2, false, 15, 4, 4, false);
         Vector2d position1 = new Vector2d(0, 0);
         Vector2d position2 = new Vector2d(8, 3);
         boolean res1;
@@ -28,11 +28,11 @@ class AbstractWorldMapTest {
     @Test
     void testPlace(){
         //given:
-        AbstractWorldMap map = new GlobeMap(7, 9, 5, 2, false, 15);
+        AbstractWorldMap map = new GlobeMap(7, 9, 5, 2, false, 15, 4, 4, false);
         Genome genome = new PredestinedAnimal(21);
 
         //when:
-        Animal scyther = new Animal(new Vector2d(2, 2), genome, 4, 6, map);
+        Animal scyther = new Animal(new Vector2d(2, 2), genome, 4, map);
 
         //then:
         assertTrue(map.animals.contains(scyther));
@@ -41,9 +41,9 @@ class AbstractWorldMapTest {
     @Test
     void testRemove(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
         Genome genome = new PredestinedAnimal(21);
-        Animal onix = new Animal(new Vector2d(10, 2), genome, 4, 6, map);
+        Animal onix = new Animal(new Vector2d(10, 2), genome, 4, map);
 
         //when:
         map.remove(onix);
@@ -55,11 +55,11 @@ class AbstractWorldMapTest {
     @Test
     void testIsOccupied(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
         Genome genome = new PredestinedAnimal(21);
         Vector2d position1 = new Vector2d(10, 2);
         Vector2d position2 = new Vector2d(0, 5);
-        Animal fearow = new Animal(position1, genome, 4, 6, map);
+        Animal fearow = new Animal(position1, genome, 4, map);
         boolean res1;
         boolean res2;
 
@@ -75,11 +75,11 @@ class AbstractWorldMapTest {
     @Test
     void testIsAnimalAt(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
         Genome genome = new PredestinedAnimal(21);
         Vector2d position1 = new Vector2d(10, 2);
         Vector2d position2 = new Vector2d(0, 5);
-        Animal jigglypuff = new Animal(position1, genome, 4, 6, map);
+        Animal jigglypuff = new Animal(position1, genome, 4, map);
         boolean res1;
         boolean res2;
 
@@ -95,12 +95,12 @@ class AbstractWorldMapTest {
     @Test
     void testStrongestAnimalAt(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
         Genome genome1 = new PredestinedAnimal(21);
         Genome genome2 = new PredestinedAnimal(21);
         Vector2d position = new Vector2d(10, 2);
-        Animal charmander = new Animal(position, genome1, 4, 6, map);
-        Animal growlithe = new Animal(position, genome2, 5, 6, map);
+        Animal charmander = new Animal(position, genome1, 4, map);
+        Animal growlithe = new Animal(position, genome2, 5, map);
 
         //when:
         Animal result = map.strongestAnimalAt(position);
@@ -112,14 +112,14 @@ class AbstractWorldMapTest {
     @Test
     void testSecondStrongestAt(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
         Genome genome1 = new PredestinedAnimal(21);
         Genome genome2 = new PredestinedAnimal(21);
         Genome genome3 = new PredestinedAnimal(21);
         Vector2d position = new Vector2d(10, 2);
-        Animal ivysaur = new Animal(position, genome1, 6, 6, map);
-        Animal bulbasaur = new Animal(position, genome2, 4, 6, map);
-        Animal venusaur = new Animal(position, genome3, 10, 6, map);
+        Animal ivysaur = new Animal(position, genome1, 6, map);
+        Animal bulbasaur = new Animal(position, genome2, 4,  map);
+        Animal venusaur = new Animal(position, genome3, 10,  map);
 
         //when:
         Animal result = map.secondStrongestAt(position);
@@ -131,7 +131,7 @@ class AbstractWorldMapTest {
     @Test
     void testGetMapEnd(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
 
         //when:
         Vector2d result = map.getMapEnd();

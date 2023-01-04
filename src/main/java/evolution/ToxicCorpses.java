@@ -22,6 +22,7 @@ public class ToxicCorpses extends GrassGrower implements IDeathObserver {
             }
 
         }
+        createGrasses();
     }
 
     public void animalDied(Animal animal) {

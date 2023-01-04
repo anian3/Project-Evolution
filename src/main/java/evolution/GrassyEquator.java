@@ -12,6 +12,7 @@ public class GrassyEquator extends GrassGrower {
     public GrassyEquator(IWorldMap map, int grassCount) {
         this.map = map;
         this.grassCount = grassCount;
+        createGrasses();
     }
 
     @Override

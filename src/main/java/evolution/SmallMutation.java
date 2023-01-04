@@ -5,8 +5,8 @@ import java.util.Random;
 public class SmallMutation extends AnimalReproducer {
 
 
-    public SmallMutation(AbstractWorldMap map, int geneCount, boolean isCrazy, int reproducingEnergy, int fedEnergy) {
-        super(map, geneCount, isCrazy, reproducingEnergy, fedEnergy);
+    public SmallMutation(AbstractWorldMap map){
+        this.map=map;
     }
 
     public Gene mutateGene(Gene gene){
