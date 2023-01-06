@@ -9,11 +9,12 @@ import java.util.stream.Stream;
 import static java.util.Collections.shuffle;
 
 public abstract class AnimalReproducer implements IAnimalReproduce{
-    AbstractWorldMap map;
-    int fedEnergy;
+    protected AbstractWorldMap map;
+    protected int minMutation;
+    protected int maxMutation;
     public int[] whichGenesMutate(){
         Random rand = new Random();
-        int mutationCount = rand.nextInt(map.geneCount+1);
+        int mutationCount = this.minMutation+rand.nextInt(maxMutation-minMutation+1);
         List <Integer> indexes = new LinkedList<>();
         for (int i=0; i<map.geneCount;i++){
             indexes.add(i);

@@ -1,5 +1,6 @@
 package evolution;
 
+import java.io.File;
 import java.util.LinkedList;
 
 public class Animal implements IMapElement{
@@ -89,5 +90,9 @@ public class Animal implements IMapElement{
     }
     public Genome getGenome(){
         return genome;
+    }
+
+    public File getResources(){
+        return new File("src/main/resources/animal.png");
     }
 }

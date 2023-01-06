@@ -5,7 +5,9 @@ import java.util.Random;
 public class SmallMutation extends AnimalReproducer {
 
 
-    public SmallMutation(AbstractWorldMap map){
+    public SmallMutation(AbstractWorldMap map,int minMutation,int maxMutation){
+        this.minMutation=minMutation;
+        this.maxMutation=maxMutation;
         this.map=map;
     }
 

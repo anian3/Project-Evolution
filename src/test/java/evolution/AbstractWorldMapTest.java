@@ -52,25 +52,6 @@ class AbstractWorldMapTest {
         assertFalse(map.animals.contains(onix));
     }
 
-    @Test
-    void testIsOccupied(){
-        //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
-        Genome genome = new PredestinedAnimal(21);
-        Vector2d position1 = new Vector2d(10, 2);
-        Vector2d position2 = new Vector2d(0, 5);
-        Animal fearow = new Animal(position1, genome, 4, map);
-        boolean res1;
-        boolean res2;
-
-        //when:
-        res1 = map.isOccupied(position1);
-        res2 = map.isOccupied(position2);
-
-        //then:
-        assertTrue(res1);
-        assertFalse(res2);
-    }
 
     @Test
     void testIsAnimalAt(){

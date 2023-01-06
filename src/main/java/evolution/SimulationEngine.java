@@ -16,10 +16,10 @@ public class SimulationEngine implements IEngine, Runnable{
         }
         AnimalCreator animalCreator = new AnimalCreator(startAnimalsCount, map, startEnergy);
         if (isSmall){
-            animalReproducer = new SmallMutation(map);
+            animalReproducer = new SmallMutation(map,minMutation,maxMutation);
         }
         else {
-            animalReproducer = new RandomMutation(map);
+            animalReproducer = new RandomMutation(map,minMutation,maxMutation);
         }
     }
 

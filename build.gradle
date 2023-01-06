@@ -1,5 +1,7 @@
 plugins {
+    id 'application'
     id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 group 'org.example'
@@ -7,6 +9,11 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    javafx {
+        version = "18"
+        modules = [ 'javafx.controls' ]
+    }
+
 }
 
 dependencies {
@@ -14,6 +21,16 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
+application {
+    mainClassName = 'evolution.World'
+}
+
 test {
     useJUnitPlatform()
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(18))
+    }
 }
