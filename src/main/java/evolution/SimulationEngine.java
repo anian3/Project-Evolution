@@ -5,14 +5,14 @@ public class SimulationEngine implements IEngine, Runnable{
     public final AbstractWorldMap map;
     private AnimalReproducer animalReproducer;
 
-    public SimulationEngine(int width, int height, boolean isEquator, boolean isGlobe, int grassCount, int grassNutrition,
+    public SimulationEngine(int width, int height, boolean isEquator, boolean isGlobe, int startGrass, int grassNutrition, int everydayGrass,
                             int startAnimalsCount, int startEnergy, int fedEnergy, int energyUsed,
                             int minMutation, int maxMutation, boolean isSmall, int geneCount, boolean isCrazy){
         if (isGlobe){
-            map = new GlobeMap(width, height, grassNutrition, energyUsed, isEquator, grassCount, geneCount, fedEnergy, isCrazy);
+            map = new GlobeMap(width, height, grassNutrition, energyUsed, isEquator, startGrass, everydayGrass, geneCount, fedEnergy, isCrazy);
         }
         else {
-            map = new HellMap(width, height, grassNutrition, energyUsed, isEquator, grassCount, geneCount, fedEnergy, isCrazy);
+            map = new HellMap(width, height, grassNutrition, energyUsed, isEquator, startGrass, everydayGrass, geneCount, fedEnergy, isCrazy);
         }
         AnimalCreator animalCreator = new AnimalCreator(startAnimalsCount, map, startEnergy);
         if (isSmall){

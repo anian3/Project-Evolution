@@ -9,10 +9,11 @@ import static java.lang.Math.floor;
 public class GrassyEquator extends GrassGrower {
 
 
-    public GrassyEquator(IWorldMap map, int grassCount) {
+    public GrassyEquator(IWorldMap map, int startGrass, int everydayGrass) {
         this.map = map;
-        this.grassCount = grassCount;
-        createGrasses();
+        this.startGrass = startGrass;
+        this.everydayGrass = everydayGrass;
+        firstGrasses();
     }
 
     @Override

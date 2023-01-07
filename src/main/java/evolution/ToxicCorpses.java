@@ -8,10 +8,11 @@ public class ToxicCorpses extends GrassGrower implements IDeathObserver {
     private Object[][] howManyDied;
     private final int positionCount;
 
-    public ToxicCorpses(IWorldMap map, int grassCount) {
+    public ToxicCorpses(IWorldMap map, int startGrass, int everydayGrass) {
 
         this.map = map;
-        this.grassCount = grassCount;
+        this.startGrass = startGrass;
+        this.everydayGrass = everydayGrass;
         positionCount = (map.getMapEnd().getX() + 1) * (map.getMapEnd().getY() + 1);
         howManyDied = new Object[positionCount][2];
         for (int i = 0; i <= map.getMapEnd().getX(); i++) {
@@ -22,7 +23,7 @@ public class ToxicCorpses extends GrassGrower implements IDeathObserver {
             }
 
         }
-        createGrasses();
+        firstGrasses();
     }
 
     public void animalDied(Animal animal) {

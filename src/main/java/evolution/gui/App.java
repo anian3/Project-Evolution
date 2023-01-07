@@ -21,30 +21,19 @@ public class App extends Application implements IPositionChangeObserver {
     GridPane gridPane = new GridPane();
     private final Vector2d [] positions={new Vector2d(2, 2), new Vector2d(3, 4),new Vector2d(5,5)};
     public void init() {
-        try {
-            map = new GrassField(10);
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex);
-        }
+
     }
 
     @Override
     public void start(Stage primaryStage) {
-
-        TextField movesInput = new TextField();
-        Button startButton = new Button("Wpisz ruchy: f,b,r lub l");
-        startButton.setOnAction(action -> {
-            String[] args = movesInput.getText().split(" ");
-            MoveDirection [] directions = new OptionParser().parse(args);
-            engine = new SimulationEngine(directions, map, this.positions);
-            for(int i=0; i<engine.animals.size();i++){
-                Animal animal=engine.animals.get(i);
-                animal.addObserver(this);
-            }
-            Thread engineThread = new Thread(engine);
-            engineThread.start();
-        });
-
+        createButtons();
+        engine = new SimulationEngine(map, this.positions);
+        for(int i=0; i<engine.animals.size();i++){
+            Animal animal=engine.animals.get(i);
+            animal.addObserver(this);
+        }
+        Thread engineThread = new Thread(engine);
+        engineThread.start();
         HBox hBoxInterface = new HBox();
         hBoxInterface.getChildren().addAll(movesInput, startButton);
 
@@ -57,6 +46,79 @@ public class App extends Application implements IPositionChangeObserver {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+    }
+
+    public void createButtons(){
+        TextField mapInput = new TextField();
+        Button mapSizeButton = new Button("Wpisz wysokość i szerokość mapy oddzielone spacją.");
+        mapSizeButton.setOnAction(action -> {
+            String[] args = mapInput.getText().split(" ");
+            int width = Integer.parseInt(args[0]);
+            int height = Integer.parseInt(args[1]);
+        });
+        Button hellButton = new Button ("Piekielny portal.");
+        hellButton.setOnAction(action -> {
+            boolean isHell = true;
+        });
+        Button globeButton = new Button ("Kula ziemska.");
+        globeButton.setOnAction(action -> {
+            boolean isHell = false;
+        });
+        TextField grassInput = new TextField();
+        Button grassCountButton = new Button("Wpisz startową liczbę roślin, energię zapewnianą przez zjedzenie jednej rośliny i liczbę roślin wzrastającą każdego dnia" +
+                "(oddzielone spacją).");
+        grassCountButton.setOnAction(action -> {
+            String[] grassArgs = mapInput.getText().split(" ");
+            int startGrass = Integer.parseInt(grassArgs[0]);
+            int grassNutrition = Integer.parseInt(grassArgs[1]);
+            int everydayGrass = Integer.parseInt(grassArgs[0]);
+        });
+        Button equatorButton = new Button ("Zalesione równiki.");
+        hellButton.setOnAction(action -> {
+            boolean isEquator = true;
+        });
+        Button toxicButton = new Button ("Toksyczne trupy");
+        globeButton.setOnAction(action -> {
+            boolean isEquator = false;
+        });
+        TextField animalInput = new TextField();
+        Button animalButton = new Button("Wpisz startową liczbę zwierzaków i ich startową energię.");
+        animalButton.setOnAction(action -> {
+            String[] animalArgs = animalInput.getText().split(" ");
+            int startAnimalsCount = Integer.parseInt(animalArgs[0]);
+            int startEnergy = Integer.parseInt(animalArgs[1]);
+        });
+        TextField energyInput = new TextField();
+        Button energyButton = new Button("Wpisz minimalną energię, kiedy zwierzak jest najedzony i energię zużywaną przy rozmnażaniu.");
+        energyButton.setOnAction(action -> {
+            String[] energyArgs = energyInput.getText().split(" ");
+            int fedEnergy = Integer.parseInt(energyArgs[0]);
+            int energyUsed = Integer.parseInt(energyArgs[1]);
+        });
+        TextField geneInput = new TextField();
+        Button geneButton = new Button("Wpisz minimalną i maksymalną liczbę mutacji oraz długość genomu.");
+        geneButton.setOnAction(action -> {
+            String[] geneArgs = geneInput.getText().split(" ");
+            int minMutation = Integer.parseInt(geneArgs[0]);
+            int maxMutation = Integer.parseInt(geneArgs[1]);
+            int geneCount = Integer.parseInt(geneArgs[2]);
+        });
+        Button randomButton = new Button("Pełna losowość mutacji.");
+        randomButton.setOnAction(action -> {
+            boolean isSmall = false;
+        });
+        Button smallButton = new Button("Lekka korekta.");
+        smallButton.setOnAction(action -> {
+            boolean isSmall = true;
+        });
+        Button crazyButton = new Button("Nieco szaleństwa zwierzaków.");
+        crazyButton.setOnAction(action -> {
+            boolean isCrazy = true;
+        });
+        Button predestinedButton = new Button("Pełna predestynacja zwierzaków.");
+        crazyButton.setOnAction(action -> {
+            boolean isCrazy = false;
+        });
     }
 
     @Override

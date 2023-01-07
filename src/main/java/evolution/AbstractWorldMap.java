@@ -13,7 +13,6 @@ public abstract class AbstractWorldMap implements IWorldMap{
     protected int energyUsed;
     protected DeadAnimals deadAnimals;
     public GrassGrower grassGrower;
-    public int grassCount;
 
     protected int geneCount;
     protected int fedEnergy;

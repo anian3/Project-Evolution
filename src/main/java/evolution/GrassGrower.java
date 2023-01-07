@@ -8,7 +8,8 @@ public abstract class GrassGrower implements IGrassGrower{
     protected IWorldMap map;
     List<Vector2d> forest = new ArrayList<>();
     List<Vector2d> barren = new ArrayList<>();
-    int grassCount;
+    int everydayGrass;
+    int startGrass;
     @Override
     public boolean growGrass() {
         Random rand = new Random();
@@ -30,10 +31,20 @@ public abstract class GrassGrower implements IGrassGrower{
         return true;
     }
 
+    public void firstGrasses(){
+        int i = 0;
+        findForest();
+        while (i < startGrass){
+            if (growGrass()){
+                i++;
+            }
+        }
+    }
+
     public void createGrasses(){
         int i = 0;
         findForest();
-        while (i < grassCount){
+        while (i < everydayGrass){
             if (growGrass()){
                 i++;
             }
