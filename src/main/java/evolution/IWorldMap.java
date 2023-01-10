@@ -20,6 +20,8 @@ public interface IWorldMap{
 
     void eat(Vector2d position);
 
+    Animal randomAnimalAt(Vector2d position);
+
     Animal strongestAnimalAt(Vector2d position);
 
     Animal secondStrongestAt(Vector2d position);

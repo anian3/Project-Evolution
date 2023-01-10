@@ -69,11 +69,20 @@ public abstract class AbstractWorldMap implements IWorldMap{
         }
     }
 
+    public Animal randomAnimalAt(Vector2d position){
+        for (Animal animal: animals){
+            if (animal.getPosition().equals(position)){
+                return animal;
+            }
+        }
+        return null;
+    }
+
     public Animal strongestAnimalAt(Vector2d position) {
         int maxEnergy = 0;
         Animal currentAnimal = null;
         for (Animal animal:animals){
-            if (animal.getEnergyValue() > maxEnergy){
+            if (animal.getPosition().equals(position) && animal.getEnergyValue() > maxEnergy){
                 maxEnergy = animal.getEnergyValue();
                 currentAnimal = animal;
             }
@@ -86,7 +95,7 @@ public abstract class AbstractWorldMap implements IWorldMap{
         int maxEnergy = 0;
         Animal secondStrongest = null;
         for (Animal animal:animals){
-            if (!animal.equals(strongestAnimal) && animal.getEnergyValue() > maxEnergy){
+            if (animal.getPosition().equals(position) && !animal.equals(strongestAnimal) && animal.getEnergyValue() > maxEnergy){
                 maxEnergy = animal.getEnergyValue();
                 secondStrongest = animal;
             }

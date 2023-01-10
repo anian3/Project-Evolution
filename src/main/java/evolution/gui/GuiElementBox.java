@@ -17,9 +17,7 @@ public class GuiElementBox {
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(20);
         imageView.setFitHeight(20);
-        Label label = new Label((element.getPosition()).toString());
         vertical= new VBox(imageView);
-        vertical.getChildren().addAll(label);
         vertical.setAlignment(Pos.CENTER);
     }
 

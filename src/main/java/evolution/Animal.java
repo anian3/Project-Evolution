@@ -11,7 +11,6 @@ public class Animal implements IMapElement{
     private int daysLived;
     protected final Energy energy;
     private LinkedList<IDeathObserver> deathObservers = new LinkedList<>();
-    private LinkedList<IPositionChangeObserver> positionObservers = new LinkedList<>();
 
     @Override
     public Vector2d getPosition() {
@@ -68,13 +67,6 @@ public class Animal implements IMapElement{
         return energy.energyValue;
     }
 
-    public void addPositionObserver(IPositionChangeObserver observer){
-        positionObservers.add(observer);
-    }
-
-    public void removePositionObserver(IPositionChangeObserver observer){
-        positionObservers.remove(observer);
-    }
     public void addDeathObserver(IDeathObserver observer){
         deathObservers.add(observer);
     }

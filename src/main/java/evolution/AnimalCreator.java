@@ -5,16 +5,11 @@ import java.util.Random;
 public class AnimalCreator {
 
     private AbstractWorldMap map;
-    private int startAnimalsCount;
     private int startEnergy;
 
-    public AnimalCreator(int startAnimalsCount, AbstractWorldMap map, int startEnergy) {
+    public AnimalCreator(AbstractWorldMap map, int startEnergy) {
         this.map = map;
-        this.startAnimalsCount = startAnimalsCount;
         this.startEnergy = startEnergy;
-        for (int i = 0; i < startAnimalsCount; i++) {
-            createAnimal();
-        }
     }
 
     public Genome createGenome() {
