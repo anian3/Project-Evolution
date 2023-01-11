@@ -45,9 +45,9 @@ public abstract class GrassGrower implements IGrassGrower{
         int i = 0;
         findForest();
         while (i < everydayGrass){
-            if (growGrass()){
-                i++;
-            }
+            growGrass();
+            i++;
+
         }
     }
 }

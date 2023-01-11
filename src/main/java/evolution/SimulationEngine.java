@@ -67,11 +67,12 @@ public class SimulationEngine implements IEngine, Runnable {
     public void run() {
         while (true) {
             moveAnimals();
+            map.deadAnimals.removeDeadAnimals(map.animals);
             grassConsumption();
             animalsReproduce();
             map.grassGrower.createGrasses();
             try {
-                Thread.sleep(300);
+                Thread.sleep(800);
             } catch (InterruptedException e) {
                 throw new RuntimeException("Przerwano symulację.");
             }

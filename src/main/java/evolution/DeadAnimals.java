@@ -14,7 +14,16 @@ public class DeadAnimals implements IDeathObserver{
 
     public void animalDied(Animal animal){
         deadAnimals.add(animal);
-        map.remove(animal);
+    }
+
+    public void removeDeadAnimals(LinkedList <Animal> animals){
+        LinkedList <Animal> animalsCopy = new LinkedList<>();
+        animalsCopy = (LinkedList<Animal>) animals.clone();
+        for (Animal animal: animalsCopy){
+            if (animal.energy.isDead()){
+                animals.remove(animal);
+            }
+        }
     }
 
 }

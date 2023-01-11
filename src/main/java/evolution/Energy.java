@@ -33,7 +33,7 @@ public class Energy {
     }
 
     public boolean isDead(){
-        return energyValue==0;
+        return energyValue<=0;
     }
 
 }

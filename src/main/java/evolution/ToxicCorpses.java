@@ -39,7 +39,6 @@ public class ToxicCorpses extends GrassGrower implements IDeathObserver {
 
     @Override
     public void findForest() {
-        System.out.println(howManyDied[60][1]);
         Arrays.sort(howManyDied,  (Object[] o1, Object[] o2) ->(int) o2[1] - (int) o1[1]);
         for (int i = 0; i < 0.2 * positionCount; i++) {
             forest.add((Vector2d) howManyDied[i][0]);
