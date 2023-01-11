@@ -11,7 +11,7 @@ class AnimalReproducerTest {
     @Test
     void makeGenes() {
         //given
-        AbstractWorldMap map = new GlobeMap(5,5,5,5,true,4, 4, 4, false);
+        AbstractWorldMap map = new GlobeMap(5,5,5,5,true,4, 4, 4, 5, false);
         Genome genome1 = new CrazyAnimal(5);
         genome1.randomGenes();
         Animal animal1 = new Animal(new Vector2d(2,2),genome1,8,map);

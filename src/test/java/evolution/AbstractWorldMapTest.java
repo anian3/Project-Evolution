@@ -10,7 +10,7 @@ class AbstractWorldMapTest {
     @Test
     void testIsBeyond() {
         //given:
-        IWorldMap map = new GlobeMap(7, 9, 5, 2, false, 15, 4, 4, false);
+        IWorldMap map = new GlobeMap(7, 9, 5, 2, false, 15, 4, 4, 5,false);
         Vector2d position1 = new Vector2d(0, 0);
         Vector2d position2 = new Vector2d(8, 3);
         boolean res1;
@@ -28,7 +28,7 @@ class AbstractWorldMapTest {
     @Test
     void testPlace(){
         //given:
-        AbstractWorldMap map = new GlobeMap(7, 9, 5, 2, false, 15, 4, 4, false);
+        AbstractWorldMap map = new GlobeMap(7, 9, 5, 2, false, 15, 4, 4, 5, false);
         Genome genome = new PredestinedAnimal(21);
 
         //when:
@@ -41,7 +41,7 @@ class AbstractWorldMapTest {
     @Test
     void testRemove(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, 5, false);
         Genome genome = new PredestinedAnimal(21);
         Animal onix = new Animal(new Vector2d(10, 2), genome, 4, map);
 
@@ -56,7 +56,7 @@ class AbstractWorldMapTest {
     @Test
     void testIsAnimalAt(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, 5, false);
         Genome genome = new PredestinedAnimal(21);
         Vector2d position1 = new Vector2d(10, 2);
         Vector2d position2 = new Vector2d(0, 5);
@@ -76,7 +76,7 @@ class AbstractWorldMapTest {
     @Test
     void testStrongestAnimalAt(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, 5, false);
         Genome genome1 = new PredestinedAnimal(21);
         Genome genome2 = new PredestinedAnimal(21);
         Vector2d position = new Vector2d(10, 2);
@@ -93,7 +93,7 @@ class AbstractWorldMapTest {
     @Test
     void testSecondStrongestAt(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, 5, false);
         Genome genome1 = new PredestinedAnimal(21);
         Genome genome2 = new PredestinedAnimal(21);
         Genome genome3 = new PredestinedAnimal(21);
@@ -112,7 +112,7 @@ class AbstractWorldMapTest {
     @Test
     void testGetMapEnd(){
         //given:
-        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, false);
+        AbstractWorldMap map = new GlobeMap(13, 9, 5, 2, false, 15, 4, 4, 5, false);
 
         //when:
         Vector2d result = map.getMapEnd();
