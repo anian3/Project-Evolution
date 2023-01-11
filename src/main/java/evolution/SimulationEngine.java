@@ -32,6 +32,11 @@ public class SimulationEngine implements IEngine, Runnable {
         for (Animal animal : map.animals) {
             animal.move();
             actionHappened();
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Przerwano symulację.");
+            }
         }
     }
 
@@ -49,16 +54,28 @@ public class SimulationEngine implements IEngine, Runnable {
         for (Animal animal : map.animals) {
             map.eat(animal.getPosition());
             actionHappened();
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Przerwano symulację.");
+            }
         }
     }
 
     public void animalsReproduce() {
-        for (Animal animal : map.animals) {
+        LinkedList<Animal> animalsCopy;
+        animalsCopy = (LinkedList<Animal>) map.animals.clone();
+        for (Animal animal : animalsCopy) {
             if (animal.equals(map.strongestAnimalAt(animal.getPosition()))) {
                 Animal secondAnimal = map.secondStrongestAt(animal.getPosition());
                 if (secondAnimal != null) {
                     animalReproducer.reproduce(animal, secondAnimal);
                     actionHappened();
+                    try {
+                        Thread.sleep(600);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException("Przerwano symulację.");
+                    }
                 }
             }
         }
@@ -72,7 +89,7 @@ public class SimulationEngine implements IEngine, Runnable {
             animalsReproduce();
             map.grassGrower.createGrasses();
             try {
-                Thread.sleep(800);
+                Thread.sleep(600);
             } catch (InterruptedException e) {
                 throw new RuntimeException("Przerwano symulację.");
             }

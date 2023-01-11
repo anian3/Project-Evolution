@@ -194,6 +194,8 @@ public class App extends Application implements IActionObserver{
             String[] args = mapInput.getText().split(" ");
             width = Integer.parseInt(args[0]);
             height = Integer.parseInt(args[1]);
+            width -= 1;
+            height -= 1;
             hBoxInterface = new HBox();
             hBoxInterface.getChildren().addAll(hellButton, globeButton);
             Scene scene = new Scene(hBoxInterface, 700, 400);
@@ -230,7 +232,7 @@ public class App extends Application implements IActionObserver{
                     } catch (FileNotFoundException e) {
                         System.out.println("nie znaleziono obrazka");
                     }
-                    gridPane.add(vbox, i + 1, j + 1);
+                    gridPane.add(vbox, i, j);
                 }
                 else if (map.isGrassAt(position)){
                     try {
@@ -238,7 +240,7 @@ public class App extends Application implements IActionObserver{
                     } catch (FileNotFoundException e) {
                         System.out.println("nie znaleziono obrazka");
                     }
-                    gridPane.add(vbox, i + 1, j + 1);
+                    gridPane.add(vbox, i, j);
                 }
             }
         }

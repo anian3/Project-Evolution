@@ -32,12 +32,9 @@ public abstract class GrassGrower implements IGrassGrower{
     }
 
     public void firstGrasses(){
-        int i = 0;
         findForest();
-        while (i < startGrass){
-            if (growGrass()){
-                i++;
-            }
+        for (int i=0; i<startGrass; i++){
+            growGrass();
         }
     }
 

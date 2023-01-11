@@ -50,6 +50,9 @@ public class Animal implements IMapElement{
             case FORWARD_LEFT -> switchDirection(7);
         }
         this.position = this.position.add(this.direction.toUnitVector());
+        if (this.map.isBeyond(this.position)){
+            map.edgeOperation(this);
+        }
         this.energy.substractEnergy(1);
     }
 
