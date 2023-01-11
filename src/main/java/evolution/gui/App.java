@@ -216,14 +216,18 @@ public class App extends Application implements IActionObserver{
         Button stopButton = new Button("STOP");
         gridPane.getChildren().add(stopButton);
         startButton.setOnAction(action->{
-            notify();
+            synchronized (engine) {
+                engine.notify();
+            }
             gridPane.getChildren().add(stopButton);
         });
         stopButton.setOnAction(action -> {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            synchronized (engine) {
+                try {
+                    engine.wait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
             gridPane.getChildren().add(startButton);
         });
