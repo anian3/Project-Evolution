@@ -15,6 +15,9 @@ public class Energy {
         this.fedEnergy = fedEnergy;
         this.animal = animal;
     }
+    public String toString(){
+        return Integer.toString(energyValue);
+    }
 
     public void addEnergy(int grassNutrition){
         this.energyValue += grassNutrition;

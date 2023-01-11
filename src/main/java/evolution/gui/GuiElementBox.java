@@ -1,5 +1,6 @@
 package evolution.gui;
 
+import evolution.Animal;
 import evolution.IMapElement;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -18,6 +19,10 @@ public class GuiElementBox {
         imageView.setFitWidth(20);
         imageView.setFitHeight(20);
         vertical= new VBox(imageView);
+        if (element.getClass() == Animal.class) {
+            Label label = new Label(element.toString());
+            vertical.getChildren().addAll(label);
+        }
         vertical.setAlignment(Pos.CENTER);
     }
 

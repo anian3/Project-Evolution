@@ -31,7 +31,7 @@ public class Animal implements IMapElement{
     }
 
     public String toString(){
-        return "Z" + position;
+        return energy.toString();
     }
 
     public boolean isAt(Vector2d position){
