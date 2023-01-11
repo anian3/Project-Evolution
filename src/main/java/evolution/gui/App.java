@@ -14,8 +14,6 @@ import java.io.FileNotFoundException;
 
 
 public class App extends Application implements IActionObserver{
-    private IWorldMap map;
-    private SimulationEngine engine;
     private final GridPane gridPane = new GridPane();
     private boolean isGlobe;
     private int width;
@@ -58,10 +56,9 @@ public class App extends Application implements IActionObserver{
 
         Button startButton = new Button("START");
         startButton.setOnAction(action -> {
-            engine = new SimulationEngine(width, height, isEquator, isGlobe, startGrass, grassNutrition, everydayGrass,
+            SimulationEngine engine = new SimulationEngine(width, height, isEquator, isGlobe, startGrass, grassNutrition, everydayGrass,
                     startAnimalsCount, startEnergy, fedEnergy, energyUsed, minMutation, maxMutation, isSmall, geneCount, isCrazy);
             engine.addObserver(this);
-            this.map = engine.map;
             Thread engineThread = new Thread(engine);
             engineThread.start();
         });
@@ -203,11 +200,11 @@ public class App extends Application implements IActionObserver{
         showScene(primaryStage, scene);
     }
 
-    public void actionHappened(){
-        Platform.runLater(this::showMap);
+    public void actionHappened(IWorldMap map){
+        Platform.runLater(()-> showMap(map));
     }
 
-    public void showMap(){
+    public void showMap(IWorldMap map){
         gridPane.setGridLinesVisible(false);
         gridPane.getColumnConstraints().clear();
         gridPane.getRowConstraints().clear();
