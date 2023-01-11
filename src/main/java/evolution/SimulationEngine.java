@@ -46,7 +46,7 @@ public class SimulationEngine implements IEngine, Runnable {
 
     public void actionHappened() {
         for (IActionObserver observer : observers) {
-            observer.actionHappened(map);
+            observer.actionHappened(map,this);
         }
     }
 

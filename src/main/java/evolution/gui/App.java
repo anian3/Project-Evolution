@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 
+import static java.lang.Thread.currentThread;
+
 
 public class App extends Application implements IActionObserver{
     private final GridPane gridPane = new GridPane();
@@ -200,16 +202,31 @@ public class App extends Application implements IActionObserver{
         showScene(primaryStage, scene);
     }
 
-    public void actionHappened(IWorldMap map){
-        Platform.runLater(()-> showMap(map));
+    public void actionHappened(IWorldMap map,IEngine engine){
+        Platform.runLater(()-> showMap(map,engine));
     }
 
-    public void showMap(IWorldMap map){
+    public void showMap(IWorldMap map,IEngine engine){
         gridPane.setGridLinesVisible(false);
         gridPane.getColumnConstraints().clear();
         gridPane.getRowConstraints().clear();
         gridPane.getChildren().clear();
         gridPane.setGridLinesVisible(true);
+        Button startButton = new Button("START");
+        Button stopButton = new Button("STOP");
+        gridPane.getChildren().add(stopButton);
+        startButton.setOnAction(action->{
+            notify();
+            gridPane.getChildren().add(stopButton);
+        });
+        stopButton.setOnAction(action -> {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            gridPane.getChildren().add(startButton);
+        });
         for (int i = 0; i <= map.getMapEnd().getX(); i++) {
             gridPane.getColumnConstraints().add(new ColumnConstraints(40));
         }
