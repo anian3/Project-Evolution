@@ -4,11 +4,8 @@ import evolution.*;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -19,7 +16,7 @@ import java.io.FileNotFoundException;
 public class App extends Application implements IActionObserver{
     private IWorldMap map;
     private SimulationEngine engine;
-    private GridPane gridPane = new GridPane();
+    private final GridPane gridPane = new GridPane();
     private boolean isGlobe;
     private int width;
     private int height;
@@ -158,7 +155,7 @@ public class App extends Application implements IActionObserver{
         });
 
         TextField grassInput = new TextField();
-        Button grassCountButton = new Button("Wpisz startowa liczbe roslin, energie zapewniana przez zjedzenie jednej rosliny i liczbe roslin wzrastająca kazdego dnia.");
+        Button grassCountButton = new Button("Wpisz startowa liczbe roslin, energie zapewniana przez zjedzenie jednej rosliny i liczbe roslin wzrastajaca kazdego dnia.");
         grassCountButton.setOnAction(action -> {
             String[] grassArgs = grassInput.getText().split(" ");
             startGrass = Integer.parseInt(grassArgs[0]);

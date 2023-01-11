@@ -10,7 +10,7 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
     javafx {
-        version = "18"
+        version = "17"
         modules = [ 'javafx.controls' ]
     }
 
@@ -31,6 +31,6 @@ test {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(18))
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }

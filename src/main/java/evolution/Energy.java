@@ -1,14 +1,12 @@
 package evolution;
 
 
-import java.util.LinkedList;
-
 public class Energy {
 
     protected int energyValue;
     private final int fedEnergy;
 
-    private Animal animal;
+    private final Animal animal;
 
     public Energy(int energy, int fedEnergy, Animal animal) {
         this.energyValue = energy;

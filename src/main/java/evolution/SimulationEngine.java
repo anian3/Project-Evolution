@@ -5,9 +5,9 @@ import java.util.LinkedList;
 public class SimulationEngine implements IEngine, Runnable {
 
     public final AbstractWorldMap map;
-    private AnimalReproducer animalReproducer;
+    private final AnimalReproducer animalReproducer;
 
-    private LinkedList<IActionObserver> observers = new LinkedList<>();
+    private final LinkedList<IActionObserver> observers = new LinkedList<>();
 
     public SimulationEngine(int width, int height, boolean isEquator, boolean isGlobe, int startGrass, int grassNutrition, int everydayGrass,
                             int startAnimalsCount, int startEnergy, int fedEnergy, int energyUsed,

@@ -110,11 +110,4 @@ public abstract class AbstractWorldMap implements IWorldMap{
         grasses.put(position, new Grass(position));
     }
 
-//    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
-//        if (oldPosition != null) {
-//            remove(oldPosition);
-//            animals.put(newPosition, animal);
-//        }
-//    }
-//    }
 }

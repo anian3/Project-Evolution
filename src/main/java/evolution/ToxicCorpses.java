@@ -1,11 +1,10 @@
 package evolution;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class ToxicCorpses extends GrassGrower implements IDeathObserver {
 
-    private Object[][] howManyDied;
+    private final Object[][] howManyDied;
     private final int positionCount;
 
     public ToxicCorpses(IWorldMap map, int startGrass, int everydayGrass) {

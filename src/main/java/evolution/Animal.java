@@ -10,7 +10,7 @@ public class Animal implements IMapElement{
     private final Genome genome;
     private int daysLived;
     protected final Energy energy;
-    private LinkedList<IDeathObserver> deathObservers = new LinkedList<>();
+    private final LinkedList<IDeathObserver> deathObservers = new LinkedList<>();
 
     @Override
     public Vector2d getPosition() {

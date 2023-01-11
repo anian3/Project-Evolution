@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class AnimalCreator {
 
-    private AbstractWorldMap map;
-    private int startEnergy;
+    private final AbstractWorldMap map;
+    private final int startEnergy;
 
     public AnimalCreator(AbstractWorldMap map, int startEnergy) {
         this.map = map;
