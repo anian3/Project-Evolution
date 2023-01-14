@@ -8,6 +8,7 @@ public class SimulationEngine implements IEngine, Runnable {
     private final AnimalReproducer animalReproducer;
 
     private final LinkedList<IActionObserver> observers = new LinkedList<>();
+    private boolean running = true;
 
     public SimulationEngine(int width, int height, boolean isEquator, boolean isGlobe, int startGrass, int grassNutrition, int everydayGrass,
                             int startAnimalsCount, int startEnergy, int fedEnergy, int energyUsed,
@@ -83,17 +84,30 @@ public class SimulationEngine implements IEngine, Runnable {
 
     public void run() {
         while (true) {
-            moveAnimals();
-            map.deadAnimals.removeDeadAnimals(map.animals);
-            grassConsumption();
-            animalsReproduce();
-            map.grassGrower.createGrasses();
-            try {
-                Thread.sleep(600);
-            } catch (InterruptedException e) {
-                throw new RuntimeException("Przerwano symulację.");
+            if (running) {
+                moveAnimals();
+                map.deadAnimals.removeDeadAnimals(map.animals);
+                grassConsumption();
+                animalsReproduce();
+                map.grassGrower.createGrasses();
+                try {
+                    Thread.sleep(600);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException("Przerwano symulację.");
+                }
             }
         }
     }
 
+    public void pause(){
+        running = false;
+    }
+
+    public void resume(){
+        running = true;
+    }
+
+    public boolean isRunning(){
+        return running;
+    }
 }

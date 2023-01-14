@@ -202,35 +202,17 @@ public class App extends Application implements IActionObserver{
         showScene(primaryStage, scene);
     }
 
-    public void actionHappened(IWorldMap map,IEngine engine){
+    public void actionHappened(IWorldMap map, IEngine engine){
         Platform.runLater(()-> showMap(map,engine));
     }
 
-    public void showMap(IWorldMap map,IEngine engine){
+    public void showMap(IWorldMap map, IEngine engine){
         gridPane.setGridLinesVisible(false);
         gridPane.getColumnConstraints().clear();
         gridPane.getRowConstraints().clear();
         gridPane.getChildren().clear();
         gridPane.setGridLinesVisible(true);
-        Button startButton = new Button("START");
-        Button stopButton = new Button("STOP");
-        gridPane.getChildren().add(stopButton);
-        startButton.setOnAction(action->{
-            synchronized (engine) {
-                engine.notify();
-            }
-            gridPane.getChildren().add(stopButton);
-        });
-        stopButton.setOnAction(action -> {
-            synchronized (engine) {
-                try {
-                    engine.wait();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            gridPane.getChildren().add(startButton);
-        });
+        Button stopStartButton = new Button("||");
         for (int i = 0; i <= map.getMapEnd().getX(); i++) {
             gridPane.getColumnConstraints().add(new ColumnConstraints(40));
         }
@@ -259,6 +241,15 @@ public class App extends Application implements IActionObserver{
                 }
             }
         }
+        gridPane.add(stopStartButton, 0, map.getMapEnd().getY()+1);
+        stopStartButton.setOnAction(action -> {
+            if (engine.isRunning()) {
+                engine.pause();
+            }
+            else{
+                engine.resume();
+            }
+        });
         gridPane.setGridLinesVisible(true);
         scene.setRoot(gridPane);
         showScene(stage, scene);
