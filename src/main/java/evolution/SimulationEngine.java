@@ -34,7 +34,7 @@ public class SimulationEngine implements IEngine, Runnable {
             animal.move();
             actionHappened();
             try {
-                Thread.sleep(600);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 throw new RuntimeException("Przerwano symulację.");
             }
@@ -56,7 +56,7 @@ public class SimulationEngine implements IEngine, Runnable {
             map.eat(animal.getPosition());
             actionHappened();
             try {
-                Thread.sleep(600);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 throw new RuntimeException("Przerwano symulację.");
             }
@@ -73,7 +73,7 @@ public class SimulationEngine implements IEngine, Runnable {
                     animalReproducer.reproduce(animal, secondAnimal);
                     actionHappened();
                     try {
-                        Thread.sleep(600);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         throw new RuntimeException("Przerwano symulację.");
                     }
@@ -82,19 +82,30 @@ public class SimulationEngine implements IEngine, Runnable {
         }
     }
 
+    public void ageAnimals(){
+        for (Animal animal: map.animals){
+            animal.ageAnimal();
+        }
+    }
+
     public void run() {
         while (true) {
             if (running) {
                 moveAnimals();
                 map.deadAnimals.removeDeadAnimals(map.animals);
+            }
+            if (running) {
                 grassConsumption();
+            }
+            if (running) {
                 animalsReproduce();
                 map.grassGrower.createGrasses();
-                try {
-                    Thread.sleep(600);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException("Przerwano symulację.");
-                }
+                ageAnimals();
+            }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Przerwano symulację.");
             }
         }
     }

@@ -8,11 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 
-import static java.lang.Thread.currentThread;
 
 
 public class App extends Application implements IActionObserver{
@@ -62,7 +62,6 @@ public class App extends Application implements IActionObserver{
                     startAnimalsCount, startEnergy, fedEnergy, energyUsed, minMutation, maxMutation, isSmall, geneCount, isCrazy);
             engine.addObserver(this);
             Thread engineThread = new Thread(engine);
-            createMap(engine.map, engine);
             engineThread.start();
         });
 
@@ -203,9 +202,11 @@ public class App extends Application implements IActionObserver{
         showScene(primaryStage, scene);
     }
 
-    public void createMap(IWorldMap map, IEngine engine){
-
-
+    public void displayStats(IWorldMap map){
+        Text text1 = new Text("Liczba wszystkich zwierzat: " + map.animalsCount());
+        Text text2 = new Text("Liczba wszystkich roslin: " + map.grassCount());
+        VBox texts = new VBox(text1, text2);
+        hBoxInterface.getChildren().addAll(texts);
     }
 
     public void actionHappened(IWorldMap map, IEngine engine){
@@ -255,14 +256,13 @@ public class App extends Application implements IActionObserver{
                 }
             }
         }
+
         gridPane.setGridLinesVisible(true);
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(gridPane, stopStartButton);
-        scene.setRoot(hbox);
+        hBoxInterface = new HBox();
+        hBoxInterface.getChildren().addAll(gridPane, stopStartButton);
+        displayStats(map);
+        scene.setRoot(hBoxInterface);
         showScene(stage, scene);
-        if (!engine.isRunning()){
-            showMap(map, engine);
-        }
     }
 
 }

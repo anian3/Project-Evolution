@@ -29,4 +29,8 @@ public interface IWorldMap{
     Vector2d getMapEnd();
 
     void growGrass(Vector2d position);
+
+    String animalsCount();
+    String grassCount();
+
 }

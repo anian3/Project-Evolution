@@ -102,6 +102,14 @@ public abstract class AbstractWorldMap implements IWorldMap{
         }
         return secondStrongest;
     }
+
+    public String animalsCount(){
+        return Integer.toString(animals.size());
+    }
+
+    public String grassCount(){
+        return Integer.toString(grasses.size());
+    }
     public Vector2d getMapEnd(){
         return this.mapEnd;
     }

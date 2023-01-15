@@ -28,6 +28,7 @@ public class Animal implements IMapElement{
             addDeathObserver((IDeathObserver) map.grassGrower);
         }
         map.place(this);
+        daysLived = 0;
     }
 
     public String toString(){
@@ -85,6 +86,10 @@ public class Animal implements IMapElement{
     }
     public Genome getGenome(){
         return genome;
+    }
+
+    public void ageAnimal(){
+        daysLived += 1;
     }
 
     public File getResources(){
