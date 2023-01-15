@@ -62,6 +62,7 @@ public class App extends Application implements IActionObserver{
                     startAnimalsCount, startEnergy, fedEnergy, energyUsed, minMutation, maxMutation, isSmall, geneCount, isCrazy);
             engine.addObserver(this);
             Thread engineThread = new Thread(engine);
+            createMap(engine.map, engine);
             engineThread.start();
         });
 
@@ -202,6 +203,11 @@ public class App extends Application implements IActionObserver{
         showScene(primaryStage, scene);
     }
 
+    public void createMap(IWorldMap map, IEngine engine){
+
+
+    }
+
     public void actionHappened(IWorldMap map, IEngine engine){
         Platform.runLater(()-> showMap(map,engine));
     }
@@ -219,6 +225,14 @@ public class App extends Application implements IActionObserver{
         for (int j = 0; j <= map.getMapEnd().getY(); j++) {
             gridPane.getRowConstraints().add(new RowConstraints(40));
         }
+        stopStartButton.setOnAction(action -> {
+            if (engine.isRunning()) {
+                engine.pause();
+            }
+            else{
+                engine.resume();
+            }
+        });
         for (int i = 0; i <= map.getMapEnd().getX(); i++) {
             for (int j = 0; j <= map.getMapEnd().getY(); j++) {
                 Vector2d position = new Vector2d(i, j);
@@ -241,18 +255,14 @@ public class App extends Application implements IActionObserver{
                 }
             }
         }
-        gridPane.add(stopStartButton, 0, map.getMapEnd().getY()+1);
-        stopStartButton.setOnAction(action -> {
-            if (engine.isRunning()) {
-                engine.pause();
-            }
-            else{
-                engine.resume();
-            }
-        });
         gridPane.setGridLinesVisible(true);
-        scene.setRoot(gridPane);
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(gridPane, stopStartButton);
+        scene.setRoot(hbox);
         showScene(stage, scene);
+        if (!engine.isRunning()){
+            showMap(map, engine);
+        }
     }
 
 }
